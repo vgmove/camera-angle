@@ -17,7 +17,7 @@
 bl_info = {
 	"name": "Camera Angle",
 	"author": "VGmove",
-	"version": (1, 0, 0),
+	"version": (1, 0, 2),
 	"blender": (4, 1, 0),
 	"location": "Properties > Camera > Camera Angle",
 	"description": "Addon for quick setup of the orthographic camera angle",
@@ -58,7 +58,7 @@ class CameraAngleHandlers:
 # Properties
 class CameraAngleProperties(bpy.types.PropertyGroup):
 	slider_horizontal: IntProperty(
-		name="",
+		name="Horizontal",
 		description="Horizontal Camera Views",
 		min=1,
 		max=8,
@@ -67,7 +67,7 @@ class CameraAngleProperties(bpy.types.PropertyGroup):
 	)
 
 	slider_vertical: IntProperty(
-		name="", 
+		name="Vertical", 
 		description="Vertical Camera Views",
 		min=1,
 		max=5,
@@ -76,7 +76,7 @@ class CameraAngleProperties(bpy.types.PropertyGroup):
 	)
 
 	distance: FloatProperty(
-		name="",
+		name="Distance",
 		description="Distance from target object",
 		min=0.1,
 		max=5,
@@ -233,33 +233,16 @@ class DATA_PT_camera_angle_panel(bpy.types.Panel):
 			row.operator(CAMERA_OT_create_target.bl_idname, text="Create")
 		else:
 			col = layout.column()
+			col.use_property_split = True
+			col.use_property_decorate = True
 
 			camera_data = camera_obj.data
 			camera_props = camera_data.property
 
-			row = col.row()
-			split = row.split(factor=0.39)
-			split.alignment = 'RIGHT'
-			split.label(text="Projection")
-			split.prop(camera_props, "projection_type", text="")
-
-			row = col.row()
-			split = row.split(factor=0.39)
-			split.alignment = 'RIGHT'
-			split.label(text="Horizontal")
-			split.prop(camera_props, "slider_horizontal", text="")
-
-			row = col.row()
-			split = row.split(factor=0.39)
-			split.alignment = 'RIGHT'
-			split.label(text="Vertical")
-			split.prop(camera_props, "slider_vertical", text="")
-
-			row = col.row()
-			split = row.split(factor=0.39)
-			split.alignment = 'RIGHT'
-			split.label(text="Distance")
-			split.prop(camera_props, "distance", text="")
+			col.prop(camera_props, "projection_type")
+			col.prop(camera_props, "slider_horizontal")
+			col.prop(camera_props, "slider_vertical")
+			col.prop(camera_props, "distance")
 
 classes = (
 	CameraAngleProperties,
