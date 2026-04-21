@@ -1,6 +1,6 @@
 # Camera Angle
 <div align="center">
-  <img src=".meta/preview.jpg" width="800"/> <br>
+  <img src=".meta/preview_1.jpg" width="800"/> <br>
 </div>
 
 Blender3D addon for quick setup of the orthographic camera angle to achieve a specific projection type, with the ability to change angles.
